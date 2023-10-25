@@ -4,7 +4,7 @@ const productBo = require('../models/bos/product_bo');
 
 router.get('/products', async (req, res) => {
   try {
-    const products = await productDao.getProducts();
+    const products = await productBo.getProducts();
     res.json(products);
   } catch (err) {
     console.error('Nem sikerült lekérdezni a termékeket. Hiba:', err);
