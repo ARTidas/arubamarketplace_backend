@@ -1,5 +1,3 @@
-module.exports = {};
-
 const userDao = require('../daos/user_dao');
 const bcrypt = require('bcrypt'); // For password hashing
 

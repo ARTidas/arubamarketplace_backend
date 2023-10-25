@@ -1,6 +1,6 @@
 const AbstractDo = require('./abstract_do');
 
-class Product extends AbstractDo {
+class productDo extends AbstractDo {
   constructor(id, title, description, price) {
     super();
     this.id = id;
@@ -10,4 +10,4 @@ class Product extends AbstractDo {
   }
 }
 
-module.exports = Product;
+module.exports = productDo;

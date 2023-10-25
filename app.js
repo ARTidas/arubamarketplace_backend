@@ -3,7 +3,7 @@ const app = express();
 const userController = require('./controllers/user_controller');
 const userDo = require('./models/dos/user_do');
 const productController = require('./controllers/product_controller');
-const userRegisterController = require('./controllers/user_register_controller');
+const userRegistrationController = require('./controllers/user_registration_controller');
 
 const cors = require('cors');
 
@@ -20,7 +20,7 @@ app.listen(port, () => {
 
 app.use('/api', userController); // Az '/api' útvonal alatt érhető el
 app.use('/api', productController);
-app.use('/api/user', userRegisterController);
+app.use('/api/user', userRegistrationController);
 
 console.log(JSON.stringify(userDo.users, null, 2));
 console.log(JSON.stringify(userDo.users, null, 2));
