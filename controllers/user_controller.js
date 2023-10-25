@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const userDao = require('../models/daos/user_dao'); // Példa adatkapcsolat-kezelő modul
 const userBo = require('../models/bos/user_bo');
 
 router.get('/users', async (req, res) => {
