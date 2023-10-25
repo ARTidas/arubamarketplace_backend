@@ -25,10 +25,6 @@ function searchProductsByName(searchTerm) {
 }
 
 module.exports = {
-  // ...
-  searchProductsByName,
-};
-
-module.exports = {
   getProducts,
+  searchProductsByName,
 };
