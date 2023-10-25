@@ -3,6 +3,12 @@ const app = express();
 const userController = require('./controllers/user_controller');
 const userDo = require('./models/dos/user_do');
 const productController = require('./controllers/product_controller');
+const cors = require('cors');
+
+// Engedélyezd a CORS-t a megfelelő eredettel (frontend eredetével)
+app.use(cors({
+  origin: 'http://localhost:4200', // Itt add meg a frontend URL-jét
+}));
 
 const port = process.env.PORT || 8080;
 
