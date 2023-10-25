@@ -1,24 +1,11 @@
-// Create an object template for user data
+const AbstractDo = require("./abstract_do");
 
-// user_do.js
-
-const users = [];
-  
-module.exports = {
-    users,
+class UserDo extends AbstractDo {
+    constructor(id, email, is_admin, owned_products, balance) {
+        this.id = id;
+        this.email = email;
+        this.is_admin = is_admin;
+        this.owned_products = owned_products;
+        this.balance = balance;
+    }
 };
-  
-
-
-
-
-/*let UserDo = AbstractDo.extend({
-    id: null,           // User ID
-    user_name: '',      // User's username
-    password_hash: '',  // Hashed password
-    is_admin: false,    // Whether the user is an admin
-    owned_products: [], // An array of the user's products
-    balance: 0          // User's account balance
-});*/
-
-

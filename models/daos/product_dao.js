@@ -1,30 +1,43 @@
 const db = require('../bos/mysql_database_connection_bo');
 
-function getProducts() {
-  return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM hck_product', (err, results) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(results);
-      }
+const productDao = {
+  getProducts: async () =>{
+    return new Promise((resolve, reject) => {
+      db.query('SELECT * FROM hck_product', (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      });
     });
-  });
+  },
+
+  searchProductById: async (id) => {
+    return new Promise((resolve, reject) => {
+      db.query('SELECT * FROM hck_product WHERE id = ?', [id], (err, result) => {
+        if (err) {
+          reject(err);
+        } else if (result.length === 0) {
+          reject(new Error('Product not found'));
+        } else {
+          resolve(result[0]);
+        }
+      });
+    });
+  },
+  
+  searchProductsByName: async (searchTerm) => {
+    return new Promise((resolve, reject) => {
+      db.query('SELECT * FROM hck_product WHERE title LIKE ?', [`%${searchTerm}%`], (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  }
 }
 
-function searchProductsByName(searchTerm) {
-  return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM hck_product WHERE title LIKE ?', [`%${searchTerm}%`], (err, results) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(results);
-      }
-    });
-  });
-}
-
-module.exports = {
-  getProducts,
-  searchProductsByName,
-};
+module.exports = productDao;

@@ -1,10 +1,10 @@
 const mysql = require('mysql2');
 
 const db = mysql.createConnection({
-  host: 'xxx',
-  database: 'xxx',
-  user: 'xxx',                              //TODO: Create a secret retreval process...
-  password: 'xxx'                           //TODO: Create a secret retreval process...
+  host: 'mariadb11.viacomkft.hu',
+  database: '16153_theapp',
+  user: '16153_theapp',                            
+  password: 'LyOOiFoEM7giE'         
 });
 
 db.connect((err) => {

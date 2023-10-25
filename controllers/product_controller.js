@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const productDao = require('../models/daos/product_dao');
+const productBo = require('../models/bos/product_bo');
 
 router.get('/products', async (req, res) => {
   try {
@@ -23,6 +23,20 @@ router.get('/products/search', async (req, res) => {
     res.json(products);
   } catch (err) {
     console.error('Hiba a termékek keresése során:', err);
+    res.status(500).json({ error: 'Hiba a keresés során' });
+  }
+});
+
+router.get('/products/:id', async (req, res) => {
+  const { id } = req.params; // Extract the product ID from the URL
+
+  try {
+    const product = await productBo.getProductById(id);
+
+    // Send the product as a JSON response
+    res.json(product);
+  } catch (err) {
+    console.error('Hiba a termék keresése során:', err);
     res.status(500).json({ error: 'Hiba a keresés során' });
   }
 });
