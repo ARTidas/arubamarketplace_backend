@@ -2,7 +2,7 @@ const db = require('../bos/mysql_database_connection_bo');
 
 function getProducts() {
   return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM hct_product', (err, results) => {
+    db.query('SELECT * FROM hck_product', (err, results) => {
       if (err) {
         reject(err);
       } else {
@@ -14,7 +14,7 @@ function getProducts() {
 
 function searchProductsByName(searchTerm) {
   return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM hct_product WHERE title LIKE ?', [`%${searchTerm}%`], (err, results) => {
+    db.query('SELECT * FROM hck_product WHERE title LIKE ?', [`%${searchTerm}%`], (err, results) => {
       if (err) {
         reject(err);
       } else {
