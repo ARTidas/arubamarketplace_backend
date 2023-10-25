@@ -12,6 +12,32 @@ function getProducts() {
   });
 }
 
+function getProductsById(id) {
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM hct_product WHERE hct_product.id = ', ['%${id}%'],  (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
+function getProductsByCategory(expression) {
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM hct_product WHERE hct_product.category LIKE ?', ['%${expression}%'],  (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
 module.exports = {
   getProducts,
+  getProductsById,
+  getProductsByCategory,
 };
