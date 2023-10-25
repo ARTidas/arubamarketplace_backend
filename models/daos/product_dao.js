@@ -12,6 +12,23 @@ function getProducts() {
   });
 }
 
+function searchProductsByName(searchTerm) {
+  return new Promise((resolve, reject) => {
+    db.query('SELECT * FROM hct_product WHERE title LIKE ?', [`%${searchTerm}%`], (err, results) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(results);
+      }
+    });
+  });
+}
+
+module.exports = {
+  // ...
+  searchProductsByName,
+};
+
 module.exports = {
   getProducts,
 };
