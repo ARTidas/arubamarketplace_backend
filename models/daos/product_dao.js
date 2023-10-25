@@ -3,7 +3,7 @@ const db = require('../bos/mysql_database_connection_bo');
 const productDao = {
   getProducts: async () =>{
     return new Promise((resolve, reject) => {
-      db.query('SELECT * FROM hck_product', (err, results) => {
+      db.query('SELECT * FROM hct_product', (err, results) => {
         if (err) {
           reject(err);
         } else {
@@ -15,7 +15,7 @@ const productDao = {
 
   getProductById: async (id) => {
     return new Promise((resolve, reject) => {
-      db.query('SELECT * FROM hck_product WHERE id = ?', [id], (err, result) => {
+      db.query('SELECT * FROM hct_product WHERE id = ?', [id], (err, result) => {
         if (err) {
           reject(err);
         } else if (result.length === 0) {
@@ -29,7 +29,7 @@ const productDao = {
   
   getProductsByName: async (searchTerm) => {
     return new Promise((resolve, reject) => {
-      db.query('SELECT * FROM hck_product WHERE title LIKE ?', [`%${searchTerm}%`], (err, results) => {
+      db.query('SELECT * FROM hct_product WHERE title LIKE ?', [`%${searchTerm}%`], (err, results) => {
         if (err) {
           reject(err);
         } else {
