@@ -13,7 +13,7 @@ const productDao = {
     });
   },
 
-  searchProductById: async (id) => {
+  getProductById: async (id) => {
     return new Promise((resolve, reject) => {
       db.query('SELECT * FROM hck_product WHERE id = ?', [id], (err, result) => {
         if (err) {
@@ -27,7 +27,7 @@ const productDao = {
     });
   },
   
-  searchProductsByName: async (searchTerm) => {
+  getProductsByName: async (searchTerm) => {
     return new Promise((resolve, reject) => {
       db.query('SELECT * FROM hck_product WHERE title LIKE ?', [`%${searchTerm}%`], (err, results) => {
         if (err) {

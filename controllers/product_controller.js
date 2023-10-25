@@ -17,7 +17,7 @@ router.get('/products/search', async (req, res) => {
   const { searchTerm } = req.query; // A keresési kifejezés, amit a frontend küld
 
   try {
-    const products = await productDao.searchProductsByName(searchTerm);
+    const products = await productBo.getProductsByName(searchTerm);
 
     // JSON formátumban küldjük vissza a talált termékeket
     res.json(products);
