@@ -24,9 +24,9 @@ function getProductsById(id) {
   });
 }
 
-function getProductsByCategory(expression) {
+function searchProductsByName(searchTerm) {
   return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM hct_product WHERE hct_product.category LIKE ?', ['%${expression}%'],  (err, results) => {
+    db.query('SELECT * FROM hct_product WHERE title LIKE ?', [`%${searchTerm}%`], (err, results) => {
       if (err) {
         reject(err);
       } else {
@@ -40,4 +40,5 @@ module.exports = {
   getProducts,
   getProductsById,
   getProductsByCategory,
+  searchProductsByName,
 };

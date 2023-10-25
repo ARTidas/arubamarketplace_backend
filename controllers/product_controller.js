@@ -12,4 +12,19 @@ router.get('/products', async (req, res) => {
   }
 });
 
+
+router.get('/products/search', async (req, res) => {
+  const { searchTerm } = req.query; // A keresési kifejezés, amit a frontend küld
+
+  try {
+    const products = await productDao.searchProductsByName(searchTerm);
+
+    // JSON formátumban küldjük vissza a talált termékeket
+    res.json(products);
+  } catch (err) {
+    console.error('Hiba a termékek keresése során:', err);
+    res.status(500).json({ error: 'Hiba a keresés során' });
+  }
+});
+
 module.exports = router;
