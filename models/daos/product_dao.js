@@ -1,7 +1,7 @@
-const db = require('../bos/mysql_database_connection_bo');
+const dbPool = require('../bos/mysql_database_connection_bo');
 
 const productDao = {
-  getProducts: async () =>{
+  /*getProducts: async () =>{
     return new Promise((resolve, reject) => {
       db.query('SELECT * FROM hct_product', (err, results) => {
         if (err) {
@@ -37,11 +37,13 @@ const productDao = {
         }
       });
     });
-  }
+  }*/
 
-  /*getProducts: async () => {
+  getProducts: async () => {
     try {
-      const [results, fields] = await db.query('SELECT * FROM hct_product');
+      const connection = await dbPool.getConnection();
+      const [results] = await connection.query('SELECT * FROM hct_product');
+      connection.release(); // Release the connection back to the pool when done
       return results;
     } catch (err) {
       throw err;
@@ -50,7 +52,9 @@ const productDao = {
 
   getProductById: async (id) => {
     try {
-      const [results, fields] = await db.query('SELECT * FROM hct_product WHERE hct_product.id = ' + id);
+      const connection = await dbPool.getConnection();
+      const [results] = await connection.query('SELECT * FROM hct_product WHERE id = ?', [id]);
+      connection.release(); // Release the connection back to the pool when done
       return results;
     } catch (err) {
       throw err;
@@ -59,12 +63,14 @@ const productDao = {
   
   getProductsByName: async (searchTerm) => {
     try {
-      const [results, fields] = await db.query('SELECT * FROM hct_product WHERE hct_product.title LIKE %' + searchTerm + '%');
+      const connection = await dbPool.getConnection();
+      const [results] = await connection.query('SELECT * FROM hct_product WHERE title LIKE ?', [`%${searchTerm}%`]);
+      connection.release(); // Release the connection back to the pool when done
       return results;
     } catch (err) {
       throw err;
     }
-  }*/
+  }
 }
 
 module.exports = productDao;
