@@ -23,6 +23,15 @@ const productBo = {
         } catch (error) {
            throw error;
         }
+    },
+
+    getProductsByName: async (searchTerm) => {
+        try {
+            const products = await productDao.getProductsByName(searchTerm);
+            return products;
+        } catch (error) {
+            throw error;
+        }
     }
 };
 

@@ -1,7 +1,7 @@
 const db = require('../bos/mysql_database_connection_bo');
 
 const productDao = {
-  getProducts: async () =>{
+  /*getProducts: async () =>{
     return new Promise((resolve, reject) => {
       db.query('SELECT * FROM hct_product', (err, results) => {
         if (err) {
@@ -12,7 +12,7 @@ const productDao = {
       });
     });
   },
-
+  
   getProductById: async (id) => {
     return new Promise((resolve, reject) => {
       db.query('SELECT * FROM hct_product WHERE id = ?', [id], (err, result) => {
@@ -37,6 +37,33 @@ const productDao = {
         }
       });
     });
+  }*/
+
+  getProducts: async () => {
+    try {
+      const [results, fields] = await db.query('SELECT * FROM hct_product');
+      return results;
+    } catch (err) {
+      throw err;
+    }
+  },
+
+  getProductById: async (id) => {
+    try {
+      const [results, fields] = await db.query('SELECT * FROM hct_product WHERE hct_product.id = ' + id);
+      return results;
+    } catch (err) {
+      throw err;
+    }
+  },
+  
+  getProductsByName: async (searchTerm) => {
+    try {
+      const [results, fields] = await db.query('SELECT * FROM hct_product WHERE hct_product.title LIKE %' + searchTerm + '%');
+      return results;
+    } catch (err) {
+      throw err;
+    }
   }
 }
 

@@ -71,15 +71,3 @@ const userDao = {
 };
 
 module.exports = userDao;
-
-/*function getUsers() {
-    return new Promise((resolve, reject) => {
-      dbConnectionController.query('SELECT * FROM users', (err, results) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(results);
-        }
-      });
-    });
-  }*/
