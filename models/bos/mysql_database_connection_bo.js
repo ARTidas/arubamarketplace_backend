@@ -1,6 +1,6 @@
 const mysql = require('mysql2');
 
-const dbPool = mysql.createPool({
+/*const dbPool = mysql.createPool({
   host: 'mariadb11.viacomkft.hu',
   database: '16153_theapp',
   user: '16153_theapp',
@@ -20,9 +20,7 @@ dbPool.promise().getConnection()
     console.error('Failed to connect to the database:', err);
   });
 
-module.exports = dbPool.promise();
-
-/*const mysql = require('mysql2');
+module.exports = dbPool.promise();*/
 
 const db = mysql.createConnection({
   host: 'mariadb11.viacomkft.hu',
@@ -39,4 +37,4 @@ db.connect((err) => {
   }
 });
 
-module.exports = db;*/
+module.exports = db;

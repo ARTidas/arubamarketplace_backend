@@ -12,7 +12,6 @@ router.get('/products', async (req, res) => {
   }
 });
 
-
 router.get('/products/search', async (req, res) => {
   const { searchTerm } = req.query; // A keresési kifejezés, amit a frontend küld
 
