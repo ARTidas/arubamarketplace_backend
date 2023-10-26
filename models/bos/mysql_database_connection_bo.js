@@ -1,4 +1,4 @@
-const mysql = require('mysql2');
+/*const mysql = require('mysql2');
 
 const dbPool = mysql.createPool({
   host: 'mariadb11.viacomkft.hu',
@@ -22,9 +22,9 @@ dbPool.getConnection((err, connection) => {
 
 // You can access connections from the pool as needed.
 
-module.exports = dbPool.promise(); // Return a promise-based pool for async/await
+module.exports = dbPool.promise(); // Return a promise-based pool for async/await*/
 
-/*const mysql = require('mysql2');
+const mysql = require('mysql2');
 
 const db = mysql.createConnection({
   host: 'mariadb11.viacomkft.hu',
@@ -41,4 +41,4 @@ db.connect((err) => {
   }
 });
 
-module.exports = db;*/
+module.exports = db;

@@ -1,7 +1,7 @@
 const db = require('../bos/mysql_database_connection_bo');
 
 const productDao = {
-  /*getProducts: async () =>{
+  getProducts: async () =>{
     return new Promise((resolve, reject) => {
       db.query('SELECT * FROM hct_product', (err, results) => {
         if (err) {
@@ -37,9 +37,9 @@ const productDao = {
         }
       });
     });
-  }*/
+  }
 
-  getProducts: async () => {
+  /*getProducts: async () => {
     try {
       const [results, fields] = await db.query('SELECT * FROM hct_product');
       return results;
@@ -64,7 +64,7 @@ const productDao = {
     } catch (err) {
       throw err;
     }
-  }
+  }*/
 }
 
 module.exports = productDao;
