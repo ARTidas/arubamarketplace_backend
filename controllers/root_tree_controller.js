@@ -1,31 +1,53 @@
 class TreeNode {
-    constructor(id, data) {
+    constructor(id, path) {
       this.id = id;
-      this.data = data;
+      this.path = path;
       this.children = [];
     }
   
     addChild(childNode) {
       this.children.push(childNode);
     }
+
+    popChild(childId) {
+        const index = this.children.findIndex(child => child.id === childId);
+        if (index !== -1) {
+          return this.children.splice(index, 1)[0];
+        }
+        return null; // Child with the specified ID not found
+      }
   }
+
+  //Function to build a new TreeNode object
+  function buildTree(data) {
+    const dataMap = new Map();
+    const root = new TreeNode(0, { name: "Root" });
   
-  // Example usage:
-  const root = new TreeNode(1, { name: 'Root Node' });
+    data.forEach(nodeData => {
+      const { id, name, parentId } = nodeData;
+      const newNode = new TreeNode(id, { name });
+      dataMap.set(id, newNode);
   
-  // Add child nodes
-  const child1 = new TreeNode(2, { name: 'Child 1' });
-  const child2 = new TreeNode(3, { name: 'Child 2' });
+      if (parentId === null) {
+        root.addChild(newNode);
+      } else {
+        const parent = dataMap.get(parentId);
+        if (parent) {
+          parent.addChild(newNode);
+        }
+      }
+    });
   
-  root.addChild(child1);
-  root.addChild(child2);
-  
-  // Add more child nodes
-  const grandchild1 = new TreeNode(4, { name: 'Grandchild 1' });
-  const grandchild2 = new TreeNode(5, { name: 'Grandchild 2' });
-  
-  child1.addChild(grandchild1);
-  child1.addChild(grandchild2);
+    return root;
+  }
+
+  /* Push back the paths */
+
+  const data = [
+    { id: 1, name: "Node 1", parentId: null },
+    { id: 2, name: "Node 2", parentId: 1 },
+    { id: 3, name: "Node 3", parentId: 1 }
+  ];
   
   // Function to print the tree
   function printTree(node, level = 0) {
@@ -38,3 +60,4 @@ class TreeNode {
   // Print the tree
   printTree(root);
   
+  module.exports = {TreeNode, buildTree, printTree};
