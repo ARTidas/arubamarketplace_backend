@@ -34,6 +34,7 @@ const userDao = {
   // Function to create a new user
 
   createUser: async (userData, callback) => {
+    console.log(userData);
     const query = 'INSERT INTO hck_users (email, password_hash, is_active, created_at, is_admin, owned_products_id, balance, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     const values = [
       userData.email,

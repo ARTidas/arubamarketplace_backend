@@ -38,28 +38,28 @@ const userBo = {
 
     // Function for email validation
     isEmailValid: async (email) => {
-        // Ellenőrizd az email cím formátumát (példa)
+        // Check the format of the email
         const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
         return emailRegex.test(email);
     },
     
     // Function for password validation
     isPasswordValid: async (password, passwordConfirmation) => {
-        // Ellenőrizd, hogy a jelszók megegyeznek
+        // Check that the passwords are the same
         return password === passwordConfirmation;
     },
     
     // Function for user registration
     registerUser: async (email, password, passwordConfirmation) => {
         if (!isEmailValid(email)) {
-          throw new Error('Az email cím érvénytelen.');
+          throw new Error('Invalid email address');
         }
       
         if (!isPasswordValid(password, passwordConfirmation)) {
-          throw new Error('A jelszavak nem egyeznek meg.');
+          throw new Error('The passwords are not the same.');
         }
       
-        // Hívd meg a DAO réteget a felhasználó regisztrálásához
+        // Calling DAO to create a new user
         return userDao.createUser(email, password);
       }
 
