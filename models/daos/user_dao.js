@@ -1,4 +1,5 @@
 const db = require('../bos/mysql_database_connection_bo');
+const userDo = require('../dos/user_do');
 
 const userDao = {
   // Function to get all user data
@@ -33,48 +34,33 @@ const userDao = {
 
   // Function to create a new user
 
-  createUser: async (userData) => {
-    console.log(userData);
-    const query = 'INSERT INTO hck_users (email, password_hash, is_active, created_at, is_admin, owned_products_id, balance, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
-    const values = [
-      userData.email,
-      userData.password,
-      userData.is_active,
-      userData.created_at,
-      userData.is_admin,
-      userData.owned_products_id,
-      userData.balance,
-      userData.updated_at,
-    ];
-  
-    // Execute the insert query
-    try {
-      const result = await db.query(query, values);
-      // Return the ID of the newly created user
-      return result.insertId;
-    } catch (queryError) {
-      throw queryError;
-    }
-  }
+  emailExist: async (email) => {
+    const connection = await db.createConnection();
 
-  /*// Function to create a new user
-  createUser: async (email, password) => {
     return new Promise((resolve, reject) => {
-      // Hash-eljük a jelszót itt (példa: bcrypt használata ajánlott)
-      const hashedPassword = hashPassword(password);
-  
-      const query = 'INSERT INTO hck_users (email, password_hash) VALUES (?, ?)';
-      dbConnectionController.query(query, [ email, hashedPassword], (err, result) => {
-        if (err) {
-          reject(err);
+      connection.query('SELECT * FROM hck_users WHERE email = ?', [email], (error, results) => {
+        if (error) {
+          reject(error);
         } else {
-          resolve('Sikeres regisztráció.');
+          resolve(results.length > 0);
         }
       });
     });
-  }*/
+  },
 
-  // Other user-related database operations can be defined here
+  saveUser: async (userDo) => {
+    const connection = await db.createConnection();
+
+    return new Promise((resolve, reject) => {
+      connection.query('INSERT INTO hck_users (email, password_hash) VALUES (?, ?)', [userDo.email, userDo.password_hash], (error) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve();
+        }
+      });
+    });
+  },
 };
 
 module.exports = userDao;

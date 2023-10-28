@@ -7,13 +7,13 @@ const app = express();
 // Példa: app.use(express.json());
 
 // Az alkalmazás figyeljen egy portra
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 80;
 app.listen(port, () => {
   console.log(`A szerver fut a(z) ${port} porton.`);
 });
 
 /*const http = require('http');
-const PORT = 8080;
+const PORT = 80;
 
 let obj = new UserDo();
 

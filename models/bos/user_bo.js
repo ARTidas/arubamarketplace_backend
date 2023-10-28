@@ -1,69 +1,64 @@
 const userDao = require('../daos/user_dao');
-const bcrypt = require('bcrypt'); // For password hashing
+const userDo = require('../dos/user_do');
+const bcrypt = require('bcrypt');
 
 const userBo = {
-    // Function for get all users user
-    getAll: async () => {
-        try {
-            const users = await userDao.getAll();
+  getAll: async () => {
+    try {
+      const users = await userDao.getAll();
+      return users;
+    } catch (error) {
+      throw error;
+    }
+  },
 
-            return users;
-        } catch (error) {
-            throw error;
-        }
-    },
+  login: async (email, password) => {
+    try {
+      const user = await userDao.getUserByEmail(email);
 
-    // Function for user login
-    login: async (email, password) => {
-        try {
-            // Retrieve user data by email from the DAO
-            const user = await userDao.getUserByEmail(email);
-
-            if (!user) {
-                return null; // User not found
-            }
-
-            // Compare the provided password with the hashed password in the database
-            const passwordMatch = await bcrypt.compare(password, user.password);
-
-            if (passwordMatch) {
-                return user; // Successful login
-            } else {
-                return null; // Invalid password
-            }
-        } catch (error) {
-            throw error; // Handle errors appropriately
-        }
-    },
-
-    // Function for email validation
-    isEmailValid: async (email) => {
-        // Check the format of the email
-        const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-        return emailRegex.test(email);
-    },
-    
-    // Function for password validation
-    isPasswordValid: async (password, passwordConfirmation) => {
-        // Check that the passwords are the same
-        return password === passwordConfirmation;
-    },
-    
-    // Function for user registration
-    registerUser: async (userData) => {
-        if (!isEmailValid(userData.email)) {
-          throw new Error('Invalid email address');
-        }
-      
-        if (!isPasswordValid(userData.password, userData.passwordConfirmation)) {
-          throw new Error('The passwords are not the same.');
-        }
-      
-        // Calling DAO to create a new user
-        return userDao.createUser(userData);
+      if (!user) {
+        return null;
       }
 
-    // Other user-related functions (e.g., registration, profile update) can be defined here
+      const passwordMatch = await bcrypt.compare(password, user.password);
+
+      if (passwordMatch) {
+        return user;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  registerUser: async (email, password, passwordConfirmation) => {
+    const emailExists = await userDao.emailExist(email);
+
+    if (emailExists) {
+      throw new Error('Az email cím már használatban van');
+    }
+
+    if (password.length < 6) {
+      throw new Error('A jelszó legalább 6 karakter hosszú legyen');
+    }
+
+    const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+    if (!emailRegex.test(email)) {
+      throw new Error('Érvénytelen email cím');
+    }
+
+    const password_hash = await bcrypt.hash(password, 10);
+    const userData = new userDo(email, password_hash);
+
+    try {
+      await userDao.saveUser(userData);
+      return 'Regisztráció sikeres';
+    } catch (error) {
+      console.error(error);
+      throw new Error('Hiba történt a regisztráció során');
+    }
+  },
 };
 
 module.exports = userBo;
