@@ -66,11 +66,7 @@ app.get('/api/hello/:id', async (req, res) => {
 
   try {
     const node = await findNodeById(tree, id);
-    //console.log(id);
-    //console.log(tree);
-    console.log(node);
-
-
+    
     // Send the node as a JSON response
     res.json(node);
   } catch (err) {
