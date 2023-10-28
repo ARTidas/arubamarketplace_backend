@@ -35,7 +35,7 @@ const userDao = {
   // Function to create a new user
 
   emailExist: async (email) => {
-    const connection = await db.createConnection();
+    const connection = await db.createConnection;
 
     return new Promise((resolve, reject) => {
       connection.query('SELECT * FROM hck_users WHERE email = ?', [email], (error, results) => {
@@ -49,7 +49,7 @@ const userDao = {
   },
 
   saveUser: async (userDo) => {
-    const connection = await db.createConnection();
+    const connection = await db.createConnection;
     console.log(userDo);
 
     return new Promise((resolve, reject) => {
