@@ -36,6 +36,7 @@ const userBo = {
     const emailExists = await userDao.emailExist(email);
 
     console.log("XXXXXXXXXXXXXXXX");
+    console.log("In BO from backend");
     console.log(email);
     console.log(password);
     console.log(passwordConfirmation);
@@ -58,7 +59,7 @@ const userBo = {
     }
 
     const password_hash = await bcrypt.hash(password, 10);
-    const userData = new userDo(email, password_hash);
+    const userData = new userDo(email, password_hash, []);
 
     try {
       await userDao.saveUser(userData);
