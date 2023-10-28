@@ -17,7 +17,6 @@ router.get('/products/search', async (req, res) => {
 
   try {
     const products = await productBo.getProductsByName(searchTerm);
-    //console.error();
     // JSON formátumban küldjük vissza a talált termékeket
     res.json(products);
   } catch (err) {
