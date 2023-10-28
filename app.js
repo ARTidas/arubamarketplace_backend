@@ -100,12 +100,13 @@ function buildTree(data) {
   const dataMap = new Map();
 
   class TreeNode {
-    constructor(id, path,url_part = "", textInput = "", decisions) {
+    constructor(id, path,url_part = "", textInput = "", decisions, commands) {
       this.id = id;
       this.path = path;
       this.url_part = url_part;
       this.textInput = textInput;
       this.decisions = decisions;
+      this.commands = commands;
       this.children = [];
     }
   
@@ -125,12 +126,12 @@ function buildTree(data) {
   const root = new TreeNode(0, { name: "https://localhost:8080/api/hello/0" }, "", "Hello, I am Amedeo, the Aruba AI assistant. What technological challenges can I help with?",
   [
       { decision: "Hello there Amedeo, I would like to have a company website", children_id: 1 },
-      { decision: "I would like to have a Wordpress shop", children_id: 1 },
-      { decision: "I would like to learn more about Kubernetes", children_id: 1 },
-      { decision: "I would like to increase my sales number", children_id: 1 },
-      { decision: "I would like to optimize my IT infrastructure cost", children_id: 1 },
-      { decision: "I would like to publish an application", children_id: 1 },
-      { decision: "I would like to organize a Kubernetes Hackathon", children_id: 1 }
+      { decision: "I would like to have a Wordpress shop", children_id: 8 },
+      { decision: "I would like to learn more about Kubernetes", children_id: 9 },
+      { decision: "I would like to increase my sales number", children_id: 10 },
+      { decision: "I would like to optimize my IT infrastructure cost", children_id: 11 },
+      { decision: "I would like to publish an application", children_id: 12 },
+      { decision: "I would like to organize a Kubernetes Hackathon", children_id: 13 }
   ]
 );
 
