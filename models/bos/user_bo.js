@@ -33,10 +33,13 @@ const userBo = {
   },
 
   registerUser: async (email, password, passwordConfirmation) => {
+    console.log("In bo from backend before anything");
+    console.log(email);
+    console.log(password);
+    console.log(passwordConfirmation);
     const emailExists = await userDao.emailExist(email);
 
-    console.log("XXXXXXXXXXXXXXXX");
-    console.log("In BO from backend");
+    console.log("In bo from backend after email exists");
     console.log(email);
     console.log(password);
     console.log(passwordConfirmation);
