@@ -17,8 +17,21 @@ router.get('/products/search/:search', async (req, res) => {
 
   try {
     const products = await productBo.getProductsByName(search);
+    const products_id = [];
+    const products_title = [];
+
+    products.forEach(element => {
+      products_id.push(element.id);
+      products_title.push(element.title);
+    });
+
+    const responseData = {
+      productIds: products_id,
+      productTitles: products_title,
+    };
+
     // JSON formátumban küldjük vissza a talált termékeket
-    res.json(products);
+    res.json(responseData);
   } catch (err) {
     console.error('Hiba a termékek keresése során:', err);
     res.status(500).json({ error: 'Hiba a keresés során' });
@@ -64,6 +77,19 @@ router.get('/products/id/:id', async (req, res) => {
   } catch (err) {
     console.error('Hiba a termék keresése során:', err);
     res.status(500).json({ error: 'Hiba a keresés során' });
+  }
+});
+
+// Create a new product
+router.post('/products/create', async (req, res) => {
+  const { title, price, description, owners, img } = req.body;
+
+  try {
+    const productId = await productBo.createProduct(title, price, description, owners, img);
+    res.status(201).json({ id: productId, message: 'Product created successfully' });
+  } catch (err) {
+    console.error('Hiba a termék létrehozása során:', err);
+    res.status(500).json({ error: 'Hiba a termék létrehozása során' });
   }
 });
 
