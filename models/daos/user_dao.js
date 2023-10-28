@@ -33,12 +33,12 @@ const userDao = {
 
   // Function to create a new user
 
-  createUser: async (userData, callback) => {
+  createUser: async (userData) => {
     console.log(userData);
     const query = 'INSERT INTO hck_users (email, password_hash, is_active, created_at, is_admin, owned_products_id, balance, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
     const values = [
       userData.email,
-      userData.password_hash,
+      userData.password,
       userData.is_active,
       userData.created_at,
       userData.is_admin,
@@ -48,15 +48,13 @@ const userDao = {
     ];
   
     // Execute the insert query
-    db.query(query, values, (queryError, results) => {
-
-      if (queryError) {
-        callback(queryError, null);
-      } else {
-        // Return the ID of the newly created user
-        callback(null, results.insertId);
-      }
-    });
+    try {
+      const result = await db.query(query, values);
+      // Return the ID of the newly created user
+      return result.insertId;
+    } catch (queryError) {
+      throw queryError;
+    }
   }
 
   /*// Function to create a new user

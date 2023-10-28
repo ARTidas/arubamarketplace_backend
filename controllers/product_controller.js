@@ -26,7 +26,7 @@ router.get('/products/search', async (req, res) => {
   }
 });
 
-router.get('/products/category', async (req, res) => {
+router.get('/products/:category', async (req, res) => {
   const { categoryName } = req.params; // Extract the products category from the URL
 
   try {

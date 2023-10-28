@@ -50,17 +50,17 @@ const userBo = {
     },
     
     // Function for user registration
-    registerUser: async (email, password, passwordConfirmation) => {
-        if (!isEmailValid(email)) {
+    registerUser: async (userData) => {
+        if (!isEmailValid(userData.email)) {
           throw new Error('Invalid email address');
         }
       
-        if (!isPasswordValid(password, passwordConfirmation)) {
+        if (!isPasswordValid(userData.password, userData.passwordConfirmation)) {
           throw new Error('The passwords are not the same.');
         }
       
         // Calling DAO to create a new user
-        return userDao.createUser(email, password);
+        return userDao.createUser(userData);
       }
 
     // Other user-related functions (e.g., registration, profile update) can be defined here
