@@ -1,3 +1,6 @@
+const express = require('express');
+const router = express.Router();
+
 class TreeNode {
     constructor(id, path,url_part = "", textInput = "") {
       this.id = id;
@@ -36,7 +39,7 @@ class TreeNode {
   
   function buildTree(data) {
     const dataMap = new Map();
-    const root = new TreeNode(0, { name: "https://localhost:8080/api/hello" }, "", "Root text");
+    const root = new TreeNode(0, { name: "https://localhost:8080/api/hello/0" }, "", "Root text");
   
     data.forEach(nodeData => {
       const { id, name, url_part, parentId, textInput } = nodeData; // Include textInput in object destructuring
@@ -84,4 +87,19 @@ class TreeNode {
   
   // Print the tree
   printTree(tree);
+
+  /*router.get('/hello/:id', async (req, res) => {
+    const { id } = req.params; // Extract the node ID from the URL
   
+    try {
+      const node = await findNodeById(tree, id);
+  
+      // Send the node as a JSON response
+      res.json(node);
+    } catch (err) {
+      console.error('Hiba a node keresése során:', err);
+      res.status(500).json({ error: 'Hiba a keresés során' });
+    }
+  });*/
+
+  module.exports = {TreeNode, router};
