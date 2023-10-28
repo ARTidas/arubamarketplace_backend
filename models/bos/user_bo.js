@@ -35,6 +35,11 @@ const userBo = {
   registerUser: async (email, password, passwordConfirmation) => {
     const emailExists = await userDao.emailExist(email);
 
+    console.log("XXXXXXXXXXXXXXXX");
+    console.log(email);
+    console.log(password);
+    console.log(passwordConfirmation);
+
     if (emailExists) {
       throw new Error('Az email cím már használatban van');
     }
