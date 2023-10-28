@@ -58,8 +58,17 @@ const userBo = {
       throw new Error('Érvénytelen email cím');
     }
 
+    console.log("From the backend, bo last mod...");
+
+    console.log(password);
+
     const password_hash = await bcrypt.hash(password, 10);
+
+    console.log(password_hash);
+
     const userData = new userDo(email, password_hash, []);
+
+    console.log(userData);
 
     try {
       await userDao.saveUser(userData);
