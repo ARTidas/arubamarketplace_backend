@@ -12,6 +12,10 @@ router.post('/register', async (req, res) => {
 
   try {
     const message = await userBo.registerUser(email, password, passwordConfirmation);
+    console.log("In controller from backend IN TRYCATCH!!!!!");
+    console.log(email);
+    console.log(password);
+    console.log(passwordConfirmation);
     res.status(201).json({ message });
   } catch (error) {
     res.status(400).json({ error: error.message });
