@@ -17,8 +17,16 @@ router.get('/products/search/:search', async (req, res) => {
 
   try {
     const products = await productBo.getProductsByName(search);
+    const products_title = [];
+
+    products.forEach(element => {
+      products_title.push(element.title);
+    });
+
     // JSON formátumban küldjük vissza a talált termékeket
-    res.json(products.title);
+    console.log("XXXXXXXXXX");
+    console.log(products_title);
+    res.json(products_title);
   } catch (err) {
     console.error('Hiba a termékek keresése során:', err);
     res.status(500).json({ error: 'Hiba a keresés során' });
