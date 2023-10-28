@@ -11,11 +11,6 @@ const productBo = {
         }
     },
 
-    createProduct: (id, title, description, price) => {
-        // Add any business logic or validation here
-        return new Product(id, title, description, price);
-    },
-
     getProductById: async (id) => {
         try {
            const product = await productDao.getProductById(id);
@@ -47,6 +42,15 @@ const productBo = {
         try {
             const categories = await productDao.getUniqueCategoryNames();
             return categories;
+        } catch (error) {
+            throw error;
+        }
+    },
+
+    createProduct: async (title, price, description, owners, img) => {
+        try {
+            const productId = await productDao.createProduct(title, price, description, owners, img);
+            return productId;
         } catch (error) {
             throw error;
         }

@@ -73,8 +73,8 @@ const productDao = {
 
   createProduct: async (title, description, price) => {
     return new Promise((resolve, reject) => {
-      const query = 'INSERT INTO hct_product (title, description, price) VALUES (?, ?, ?)';
-      const values = [title, description, price];
+      const query = 'INSERT INTO hct_product (title, price, description, owners, img) VALUES (?, ?, ?, ?, ?)';
+      const values = [title, price, description, owners, img];
 
       db.query(query, values, (err, results) => {
         if (err) {
