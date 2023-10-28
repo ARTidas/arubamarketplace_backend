@@ -29,6 +29,10 @@ app.use('/api/user', userLoginController);
 app.use('/api', applicationInstallController);
 app.use('/api/click', clickController);
 app.get('/api/hello/:id', async (req, res) => {
+
+  /* MAKE DATABASE HERE */
+  //id, user_id, node_id, status, version
+
   const { id } = req.params; // Extract the node ID from the URL
 
   const data = [
@@ -45,7 +49,7 @@ app.get('/api/hello/:id', async (req, res) => {
         ]
     },
     { id: 3, name: "https://localhost:8080/api/hello/3", url_part: "company-website/cluster-yes/domain-yes", parentId: 2, textInput: "I am ready to install everything for you. Would you like to pay with credit card or crypto?", decisions: [] },
-    { id: 4, name: "https://localhost:8080/api/hello/4", url_part: "company-website/cluster-yes/domain-no", parentId: 2, textInput: "You are able to get a domain name here.", decisions: [] },
+    { id: 4, name: "https://localhost:8080/api/hello/4", url_part: "company-website/cluster-yes/domain-no", parentId: 2, textInput: "Would you like to have one?", decisions: [] },
     { id: 5, name: "https://localhost:8080/api/hello/5", url_part: "company-website/cluster-no", parentId: 1, textInput: "Do you have a Kubernetes cluster at another provider?",
     decisions: [
         { decision: "Yes", children_id: 6 },
