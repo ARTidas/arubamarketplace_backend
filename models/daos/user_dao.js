@@ -50,6 +50,7 @@ const userDao = {
 
   saveUser: async (userDo) => {
     const connection = await db.createConnection();
+    console.log(userDo);
 
     return new Promise((resolve, reject) => {
       connection.query('INSERT INTO hck_users (email, password_hash) VALUES (?, ?)', [userDo.email, userDo.password_hash], (error) => {

@@ -39,6 +39,10 @@ const userBo = {
       throw new Error('Az email cím már használatban van');
     }
 
+    if (password !== passwordConfirmation) {
+        throw new Error('A megadott két jelszó nem egyezik.');
+    }
+
     if (password.length < 6) {
       throw new Error('A jelszó legalább 6 karakter hosszú legyen');
     }
