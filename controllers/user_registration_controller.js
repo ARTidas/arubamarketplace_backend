@@ -5,6 +5,7 @@ const userBo = require('../models/bos/user_bo');
 router.post('/register', async (req, res) => {
   const { email, password, passwordConfirmation } = req.body;
 
+  console.log("In controller from backend");
   console.log(email);
   console.log(password);
   console.log(passwordConfirmation);
