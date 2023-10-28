@@ -2,6 +2,17 @@ const userDao = require('../daos/user_dao');
 const bcrypt = require('bcrypt'); // For password hashing
 
 const userBo = {
+    // Function for get all users user
+    getAll: async () => {
+        try {
+            const users = await userDao.getAll();
+
+            return users;
+        } catch (error) {
+            throw error;
+        }
+    },
+
     // Function for user login
     login: async (email, password) => {
         try {

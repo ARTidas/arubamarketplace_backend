@@ -1,6 +1,6 @@
 const AbstractDo = require("./abstract_do");
 
-class Installation extends AbstractDo {
+class applicationInstallDo extends AbstractDo {
     constructor(id, userId, nodeId, status, version) {
         this.id = id;
         this.userId = userId;
@@ -10,4 +10,4 @@ class Installation extends AbstractDo {
     }
 }
 
-module.exports = Installation;
+module.exports = applicationInstallDo;

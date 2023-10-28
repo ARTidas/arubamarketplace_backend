@@ -6,16 +6,16 @@ router.post('/installations', (req, res) => {
   const { name, description } = req.body;
 
   try {
-    const installation = applicationInstallBo.install(name, description);
+    const installation = applicationInstallBo.handleUserClick(name, description);
     res.status(201).json(installation);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 });
 
-router.get('/installations', (req, res) => {
+/*router.get('/installations', (req, res) => {
   const installations = applicationInstallBo.listInstallations();
   res.status(200).json(installations);
-});
+});*/
 
 module.exports = router;

@@ -1,33 +1,28 @@
-const dbConnectionController = require('../bos/mysql_database_connection_bo');
+const db = require('../bos/mysql_database_connection_bo');
 
 const userDao = {
   // Function to get all user data
   getAll: async () => {
-    try {
-        const query = 'SELECT * FROM hck.users';
-        const values = [email];
-        const { rows } = await db.query(query, values);
-
-        if (rows.length === 0) {
-            return null; // No user found
-            console.log("User not found . . . . .");
+    return new Promise((resolve, reject) => {
+      db.query('SELECT * FROM hck_users', (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results);
         }
-
-        return rows; // Return the first user found (assuming email is unique)
-    } catch (error) {
-        throw error; // Handle database query errors
-    }
+      });
+    });
   },
+
   // Function to get user data by email
   getUserByEmail: async (email) => {
       try {
-          const query = 'SELECT * FROM hck.users WHERE email = $1';
+          const query = 'SELECT * FROM hck_users WHERE email = $1';
           const values = [email];
           const { rows } = await db.query(query, values);
 
           if (rows.length === 0) {
               return null; // User not found
-              console.log("User not found . . . . .");
           }
 
           return rows[0]; // Return the first user found (assuming email is unique)
@@ -37,17 +32,30 @@ const userDao = {
   },
 
   // Function to create a new user
-  createUser: async (userData) => {
-      try {
-          const { email, password} = userData;
-          const query = 'INSERT INTO hck.users (email, password) VALUES ($1, $2) RETURNING *';
-          const values = [email, password];
-          const { rows } = await db.query(query, values);
 
-          return rows[0]; // Return the newly created user
-      } catch (error) {
-          throw error; // Handle database query errors
+  createUser: async (userData, callback) => {
+    const query = 'INSERT INTO hck_users (email, password_hash, is_active, created_at, is_admin, owned_products_id, balance, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)';
+    const values = [
+      userData.email,
+      userData.password_hash,
+      userData.is_active,
+      userData.created_at,
+      userData.is_admin,
+      userData.owned_products_id,
+      userData.balance,
+      userData.updated_at,
+    ];
+  
+    // Execute the insert query
+    db.query(query, values, (queryError, results) => {
+
+      if (queryError) {
+        callback(queryError, null);
+      } else {
+        // Return the ID of the newly created user
+        callback(null, results.insertId);
       }
+    });
   }
 
   /*// Function to create a new user
