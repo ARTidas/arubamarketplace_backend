@@ -8,6 +8,7 @@ const userLoginController = require('./controllers/user_login_controller');
 const rootTreeController = require('./controllers/root_tree_controller');
 const applicationInstallController = require('./controllers/application_install_controller');
 const clickController = require('./controllers/click_controller');
+const bodyParser = require('body-parser');
 
 const cors = require('cors');
 
@@ -22,6 +23,7 @@ app.listen(port, () => {
   console.log(`Az alkalmazás fut a ${port} porton.`);
 });
 
+app.use(bodyParser.json());
 app.use('/api', userController); // Az '/api' útvonal alatt érhető el
 app.use('/api', productController);
 app.use('/api/user', userRegistrationController);
