@@ -67,7 +67,7 @@ const userBo = {
 
     console.log("New fasz");
 
-    console.log(userDo);
+    //console.log(userData);
 
     try {
       await userDao.saveUser(userData);
