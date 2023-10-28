@@ -63,7 +63,9 @@ const userBo = {
 
     console.log(password_hash);
 
-    const userData = new userDo(email, password_hash, []);
+    const userData = new userDo(email, password_hash);
+
+    console.log("New fasz");
 
     console.log(userData);
 
