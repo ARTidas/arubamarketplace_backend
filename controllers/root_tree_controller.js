@@ -19,6 +19,20 @@ class TreeNode {
       return null; // Child with the specified ID not found
     }
   }
+
+  function findNodeById(node, targetId) {
+    if (node.id === targetId) {
+      return node;
+    }
+
+    for (const child of node.children) {
+      const result = findNodeById(child, targetId);
+      if (result) {
+        return result;
+      }
+    }
+    return null;
+  }
   
   function buildTree(data) {
     const dataMap = new Map();
