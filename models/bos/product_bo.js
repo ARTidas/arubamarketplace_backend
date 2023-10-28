@@ -2,9 +2,9 @@ const productDo = require('../dos/product_do'); // Import the data object
 const productDao = require('../daos/product_dao');
 
 const productBo = {
-    getProducts: async (id) => {
+    getProducts: async () => {
         try {
-            const product = await productDao.getProducts(id);
+            const product = await productDao.getProducts();
             return product;
         } catch (error) {
             throw error;
