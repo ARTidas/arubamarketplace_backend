@@ -1,7 +1,7 @@
 // Import required modules and dependencies
 const express = require('express');
 const router = express.Router();
-const userBo = require('../bos/user_bo'); // Import the user business object
+const userBo = require('../models/bos/user_bo'); // Import the user business object
 
 // Define a route for user login
 router.post('/login', async (req, res) => {
