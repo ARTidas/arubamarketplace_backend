@@ -13,10 +13,10 @@ router.get('/products', async (req, res) => {
 });
 
 router.get('/products/search', async (req, res) => {
-  const { searchTerm } = req.query; // A keresési kifejezés, amit a frontend küld
+  const { search } = req.query; // A keresési kifejezés, amit a frontend küld
 
   try {
-    const products = await productBo.getProductsByName(searchTerm);
+    const products = await productBo.getProductsByName(search);
     // JSON formátumban küldjük vissza a talált termékeket
     res.json(products);
   } catch (err) {
@@ -25,11 +25,25 @@ router.get('/products/search', async (req, res) => {
   }
 });
 
+router.get('/products/categories', async (req, res) => {
+  try {
+    const categories = await productBo.getUniqueCategoryNames();
+
+    // Send the categories as a JSON response
+    res.json(categories);
+  } catch (err) {
+    console.error('Hiba a kategóriák keresése során:', err);
+    res.status(500).json({ error: 'Hiba a keresés során' });
+  }
+});
+
 router.get('/products/:category', async (req, res) => {
-  const { categoryName } = req.params; // Extract the products category from the URL
+  const { category } = req.params; // Extract the products category from the URL
+
+  console.log(category);
 
   try {
-    const products = await productBo.getProductsByCategoryName(categoryName);
+    const products = await productBo.getProductsByCategoryName(category);
 
     // Send the products as a JSON response
     res.json(products);

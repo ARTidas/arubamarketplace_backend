@@ -41,6 +41,15 @@ const productBo = {
         } catch (error) {
             throw error;
         }
+    },
+
+    getUniqueCategoryNames: async () => {
+        try {
+            const categories = await productDao.getUniqueCategoryNames();
+            return categories;
+        } catch (error) {
+            throw error;
+        }
     }
 };
 

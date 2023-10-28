@@ -55,6 +55,20 @@ const productDao = {
         }
       });
     });
+  },
+
+  getUniqueCategoryNames: async () => {
+    return new Promise((resolve, reject) => {
+      db.query('SELECT DISTINCT category FROM hct_product', (err, results) => {
+        if (err) {
+          reject(err);
+        } else if (results.length === 0) {
+          reject(new Error('No category found.'));
+        } else {
+          resolve(results);
+        }
+      });
+    });
   }
 
   /*getProducts: async () => {
