@@ -12,8 +12,6 @@ app.listen(port, () => {
   console.log(`A szerver fut a(z) ${port} porton.`);
 });
 
-
-
 /*const http = require('http');
 const PORT = 8080;
 

@@ -17,6 +17,9 @@ const productDao = {
   getProductById: async (id) => {
     return new Promise((resolve, reject) => {
       db.query('SELECT * FROM hct_product WHERE id = ?', [id], (err, result) => {
+        console.error(id);
+        console.error(err);
+        console.error(result);
         if (err) {
           reject(err);
         } else if (result.length === 0) {
@@ -33,6 +36,20 @@ const productDao = {
       db.query('SELECT * FROM hct_product WHERE title LIKE ?', [`%${searchTerm}%`], (err, results) => {
         if (err) {
           reject(err);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+  },
+
+  getProductsByCategoryName: async (categoryName) => {
+    return new Promise((resolve, reject) => {
+      db.query('SELECT * FROM hct_product WHERE category = ?', [categoryName], (err, results) => {
+        if (err) {
+          reject(err);
+        } else if (results.length === 0) {
+          reject(new Error('Products not found'));
         } else {
           resolve(results);
         }

@@ -32,6 +32,15 @@ const productBo = {
         } catch (error) {
             throw error;
         }
+    },
+
+    getProductsByCategoryName: async (categoryName) => {
+        try {
+            const products = await productDao.getProductsByCategoryName(categoryName);
+            return products;
+        } catch (error) {
+            throw error;
+        }
     }
 };
 

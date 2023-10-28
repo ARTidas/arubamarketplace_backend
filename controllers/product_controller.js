@@ -17,8 +17,22 @@ router.get('/products/search', async (req, res) => {
 
   try {
     const products = await productBo.getProductsByName(searchTerm);
-
+    //console.error();
     // JSON formátumban küldjük vissza a talált termékeket
+    res.json(products);
+  } catch (err) {
+    console.error('Hiba a termékek keresése során:', err);
+    res.status(500).json({ error: 'Hiba a keresés során' });
+  }
+});
+
+router.get('/products/category', async (req, res) => {
+  const { categoryName } = req.params; // Extract the products category from the URL
+
+  try {
+    const products = await productBo.getProductsByCategoryName(categoryName);
+
+    // Send the products as a JSON response
     res.json(products);
   } catch (err) {
     console.error('Hiba a termékek keresése során:', err);
