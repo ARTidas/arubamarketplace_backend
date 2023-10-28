@@ -1,16 +1,20 @@
 const applicationInstallDao = require('../daos/application_install_dao');
 
-function install(name, description) {
-  // Validáció és üzleti logika
-  if (!name || !description) {
-    throw new Error('Név és leírás megadása kötelező.');
+function handleUserClick(nodeId, decision) {
+  if (!nodeId) {
+    throw new Error('Hiányzó node ID.');
   }
 
-  return applicationInstallDao.createInstallation(name, description);
+  // Validáció és üzleti logika
+  if (decision === 'Yes') {
+    // Döntés kezelése, ha 'Yes'
+    // Példa: applicationInstallDao.createInstallation(name, description);
+  } else if (decision === 'No') {
+    // Döntés kezelése, ha 'No'
+    // Példa: applicationInstallDao.createInstallation(name, description);
+  } else {
+    throw new Error('Érvénytelen döntés.');
+  }
 }
 
-function listInstallations() {
-  return applicationInstallDao.getInstallations();
-}
-
-module.exports = { install, listInstallations };
+module.exports = { handleUserClick };

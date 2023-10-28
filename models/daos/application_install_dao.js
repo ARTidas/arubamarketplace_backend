@@ -1,16 +1,9 @@
-const applicationInstallDo = require('../dos/application_install_do');
+const db = require('../bos/mysql_database_connection_bo');
 
-const installations = []; // Példa adatbázis
-
-function createInstallation(name, description) {
-  const id = installations.length + 1;
-  const installation = new applicationInstallDo(id, name, description);
-  installations.push(installation);
-  return installation;
+function insertClickToDatabase(userId, nodeId, status, version) {
+  const insertQuery = 'INSERT INTO hck_application_install (user_id, node_id, status, version) VALUES (?, ?, ?, ?)';
+  const values = [userId, nodeId, status, version];
+  return db.query(insertQuery, values);
 }
 
-function getInstallations() {
-  return installations;
-}
-
-module.exports = { createInstallation, getInstallations };
+module.exports = { insertClickToDatabase };
