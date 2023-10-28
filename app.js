@@ -4,6 +4,7 @@ const userController = require('./controllers/user_controller');
 const userDo = require('./models/dos/user_do');
 const productController = require('./controllers/product_controller');
 const userRegistrationController = require('./controllers/user_registration_controller');
+const userLoginController = require('./controllers/user_login_controller');
 const rootTreeController = require('./controllers/root_tree_controller');
 const applicationInstallController = require('./controllers/application_install_controller');
 const clickController = require('./controllers/click_controller');
@@ -24,6 +25,7 @@ app.listen(port, () => {
 app.use('/api', userController); // Az '/api' útvonal alatt érhető el
 app.use('/api', productController);
 app.use('/api/user', userRegistrationController);
+app.use('/api/user', userLoginController);
 app.use('/api', applicationInstallController);
 app.use('/api/click', clickController);
 app.get('/api/hello/:id', async (req, res) => {
@@ -66,7 +68,7 @@ app.get('/api/hello/:id', async (req, res) => {
 
   try {
     const node = await findNodeById(tree, id);
-    
+
     // Send the node as a JSON response
     res.json(node);
   } catch (err) {
