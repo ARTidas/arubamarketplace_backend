@@ -1,6 +1,6 @@
-//const AbstractDo = require("./abstract_do");
+const AbstractDo = require("./abstract_do");
 
-class userDo /*extends AbstractDo*/ {
+class userDo extends AbstractDo {
     constructor(id, email, password_hash, is_active, created_at, is_admin, owned_products_id, balance, updated_at) {
         this.id = id;
         this.email = email;
