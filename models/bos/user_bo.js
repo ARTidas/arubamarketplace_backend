@@ -33,10 +33,6 @@ const userBo = {
   },
 
   registerUser: async (email, password, passwordConfirmation) => {
-    console.log("In bo from backend before anything");
-    console.log(email);
-    console.log(password);
-    console.log(passwordConfirmation);
     const emailExists = await userDao.emailExist(email);
 
     console.log("In bo from backend after email exists");
@@ -52,7 +48,7 @@ const userBo = {
         throw new Error('A megadott két jelszó nem egyezik.');
     }
 
-    if (password.length < 6) {
+    if (toString(password).length < 6) {
       throw new Error('A jelszó legalább 6 karakter hosszú legyen');
     }
 

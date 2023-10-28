@@ -40,7 +40,7 @@ const userDao = {
         if (error) {
           reject(error);
         } else {
-          resolve(results);
+          resolve(results.length > 0);
         }
       });
     });
