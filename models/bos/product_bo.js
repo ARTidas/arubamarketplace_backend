@@ -28,8 +28,6 @@ const productBo = {
     getProductsByName: async (search) => {
         try {
             const products = await productDao.getProductsByName(search);
-            console.log("XXXXXXXXXXXX");
-            console.log(products);
             return products;
         } catch (error) {
             throw error;

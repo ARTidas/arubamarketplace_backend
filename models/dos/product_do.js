@@ -1,12 +1,16 @@
 const AbstractDo = require('./abstract_do');
 
 class productDo extends AbstractDo {
-  constructor(id, title, description, price) {
+  constructor(id, title, price, category, description, owners, img) {
     super();
     this.id = id;
     this.title = title;
-    this.description = description;
     this.price = price;
+    this.category = category;
+    this.description = description;
+    this.owners = owners;
+    this.owners = owners;
+    this.img = img;
   }
 }
 

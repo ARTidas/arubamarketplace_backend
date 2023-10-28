@@ -43,19 +43,6 @@ const productDao = {
     });
   },
 
-  /*getProductsByName: async (search) => {
-    return new Promise((resolve, reject) => {
-      const query = 'SELECT * FROM hct_product WHERE title LIKE ?';
-      db.query(query, ['%${search}%'], (error, results) => {
-        if (error) {
-          return reject(error);
-        }
-
-        return resolve(results);
-      })
-    });
-  },*/
-
   getProductsByCategoryName: async (category) => {
     return new Promise((resolve, reject) => {
       db.query('SELECT * FROM hct_product WHERE category = ?', [category], (err, results) => {
@@ -82,40 +69,22 @@ const productDao = {
         }
       });
     });
+  },
+
+  createProduct: async (title, description, price) => {
+    return new Promise((resolve, reject) => {
+      const query = 'INSERT INTO hct_product (title, description, price) VALUES (?, ?, ?)';
+      const values = [title, description, price];
+
+      db.query(query, values, (err, results) => {
+        if (err) {
+          reject(err);
+        } else {
+          resolve(results.insertId);
+        }
+      });
+    });
   }
-
-  /*getProducts: async () => {
-    try {
-      const connection = await dbPool.getConnection();
-      const [results] = await connection.query('SELECT * FROM hct_product');
-      connection.release(); // Release the connection back to the pool when done
-      return results;
-    } catch (err) {
-      throw err;
-    }
-  },
-
-  getProductById: async (id) => {
-    try {
-      const connection = await dbPool.getConnection();
-      const [results] = await connection.query('SELECT * FROM hct_product WHERE id = ?', [id]);
-      connection.release(); // Release the connection back to the pool when done
-      return results;
-    } catch (err) {
-      throw err;
-    }
-  },
-  
-  getProductsByName: async (searchTerm) => {
-    try {
-      const connection = await dbPool.getConnection();
-      const [results] = await connection.query('SELECT * FROM hct_product WHERE title LIKE ?', [`%${searchTerm}%`]);
-      connection.release(); // Release the connection back to the pool when done
-      return results;
-    } catch (err) {
-      throw err;
-    }
-  }*/
 }
 
 module.exports = productDao;
