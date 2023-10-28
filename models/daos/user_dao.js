@@ -35,25 +35,23 @@ const userDao = {
   // Function to create a new user
 
   emailExist: async (email) => {
-    const connection = await db.createConnection;
-
     return new Promise((resolve, reject) => {
-      connection.query('SELECT * FROM hck_users WHERE email = ?', [email], (error, results) => {
+      db.query('SELECT * FROM hck_users WHERE email = ?', [email], (error, results) => {
         if (error) {
           reject(error);
         } else {
-          resolve(results.length > 0);
+          resolve(results);
         }
       });
     });
   },
 
   saveUser: async (userDo) => {
-    const connection = await db.createConnection;
     console.log(userDo);
+    console.log("Here!!");
 
     return new Promise((resolve, reject) => {
-      connection.query('INSERT INTO hck_users (email, password_hash) VALUES (?, ?)', [userDo.email, userDo.password_hash], (error) => {
+      db.query('INSERT INTO hck_users (email, password_hash) VALUES (?, ?)', [userDo.email, userDo.password_hash], (error) => {
         if (error) {
           reject(error);
         } else {
