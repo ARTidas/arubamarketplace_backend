@@ -44,11 +44,19 @@ class TreeNode {
   /* Push back the paths */
 
   const data = [
-    { id: 1, name: "Node 1", parentId: null },
-    { id: 2, name: "Node 2", parentId: 1 },
-    { id: 3, name: "Node 3", parentId: 1 },
-    { id: 4, name: "Node 4", parentId: null },
-    { id: 5, name: "Node 5", parentId: 1 }
+    { id: 1, name: "https://localhost:8080/hello/company-website", parentId: null },
+    { id: 2, name: "https://localhost:8080/hello/company-website/cluster-yes", parentId: 1 },
+    { id: 3, name: "https://localhost:8080/hello/company-website/cluster-yes/domain-yes", parentId: 2 },
+    { id: 4, name: "https://localhost:8080/hello/company-website/cluster-yes/domain-no", parentId: 2 },
+    { id: 5, name: "https://localhost:8080/hello/company-website/cluster-no", parentId: 1 },
+    { id: 6, name: "https://localhost:8080/hello/company-website/cluster-no/another-provider-yes", parentId: 2 },
+    { id: 7, name: "https://localhost:8080/hello/company-website/cluster-no/another-provider-no", parentId: 2 },
+    { id: 8, name: "https://localhost:8080/hello/wordpress-shop", parentId: null },
+    { id: 9, name: "https://localhost:8080/hello/kubernetes-education", parentId: null },
+    { id: 10, name: "https://localhost:8080/hello/marketing", parentId: null },
+    { id: 11, name: "https://localhost:8080/hello/cost-optimization", parentId: null },
+    { id: 12, name: "https://localhost:8080/hello/publish-application", parentId: null },
+    { id: 13, name: "https://localhost:8080/hello/organize-hackathon", parentId: null }
   ];
 
   const tree = buildTree(data);
