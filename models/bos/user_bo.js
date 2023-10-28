@@ -35,11 +35,6 @@ const userBo = {
   registerUser: async (email, password, passwordConfirmation) => {
     const emailExists = await userDao.emailExist(email);
 
-    console.log("In bo from backend after email exists");
-    console.log(email);
-    console.log(password);
-    console.log(passwordConfirmation);
-
     if (emailExists) {
       throw new Error('Az email cím már használatban van');
     }
@@ -54,10 +49,13 @@ const userBo = {
 
     const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
     if (!emailRegex.test(email)) {
+        console.log("szar");
       throw new Error('Érvénytelen email cím');
     }
 
     console.log("From the backend, bo last mod...");
+
+    console.log(email);
 
     console.log(password);
 
