@@ -1,11 +1,11 @@
 class Installation {
-    constructor(id, name, description, version) {
-      this.id = id;
-      this.name = name;
-      this.description = description;
-      this.version = version;
+    constructor(id, userId, nodeId, status, version) {
+        this.id = id;
+        this.userId = userId;
+        this.nodeId = nodeId;
+        this.status = status;
+        this.version = version;
     }
-  }
-  
-  module.exports = Installation;
-  
+}
+
+module.exports = Installation;
