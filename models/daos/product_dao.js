@@ -31,9 +31,9 @@ const productDao = {
     });
   },
   
-  getProductsByName: async (searchTerm) => {
+  getProductsByName: async (search) => {
     return new Promise((resolve, reject) => {
-      db.query('SELECT * FROM hct_product WHERE title LIKE ?', [`%${searchTerm}%`], (err, results) => {
+      db.query('SELECT * FROM hct_product WHERE title LIKE ?', [`%${search}%`], (err, results) => {
         if (err) {
           reject(err);
         } else {
@@ -43,9 +43,22 @@ const productDao = {
     });
   },
 
-  getProductsByCategoryName: async (categoryName) => {
+  /*getProductsByName: async (search) => {
     return new Promise((resolve, reject) => {
-      db.query('SELECT * FROM hct_product WHERE category = ?', [categoryName], (err, results) => {
+      const query = 'SELECT * FROM hct_product WHERE title LIKE ?';
+      db.query(query, ['%${search}%'], (error, results) => {
+        if (error) {
+          return reject(error);
+        }
+
+        return resolve(results);
+      })
+    });
+  },*/
+
+  getProductsByCategoryName: async (category) => {
+    return new Promise((resolve, reject) => {
+      db.query('SELECT * FROM hct_product WHERE category = ?', [category], (err, results) => {
         if (err) {
           reject(err);
         } else if (results.length === 0) {

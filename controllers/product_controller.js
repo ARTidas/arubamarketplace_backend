@@ -12,8 +12,8 @@ router.get('/products', async (req, res) => {
   }
 });
 
-router.get('/products/search', async (req, res) => {
-  const { search } = req.query; // A keresési kifejezés, amit a frontend küld
+router.get('/products/search/:search', async (req, res) => {
+  const { search } = req.params; // A keresési kifejezés, amit a frontend küld
 
   try {
     const products = await productBo.getProductsByName(search);
@@ -37,7 +37,7 @@ router.get('/products/categories', async (req, res) => {
   }
 });
 
-router.get('/products/:category', async (req, res) => {
+router.get('/products/category/:category', async (req, res) => {
   const { category } = req.params; // Extract the products category from the URL
 
   console.log(category);
@@ -53,7 +53,7 @@ router.get('/products/:category', async (req, res) => {
   }
 });
 
-router.get('/products/:id', async (req, res) => {
+router.get('/products/id/:id', async (req, res) => {
   const { id } = req.params; // Extract the product ID from the URL
 
   try {

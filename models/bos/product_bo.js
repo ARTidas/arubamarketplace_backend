@@ -25,18 +25,20 @@ const productBo = {
         }
     },
 
-    getProductsByName: async (searchTerm) => {
+    getProductsByName: async (search) => {
         try {
-            const products = await productDao.getProductsByName(searchTerm);
+            const products = await productDao.getProductsByName(search);
+            console.log("XXXXXXXXXXXX");
+            console.log(products);
             return products;
         } catch (error) {
             throw error;
         }
     },
 
-    getProductsByCategoryName: async (categoryName) => {
+    getProductsByCategoryName: async (category) => {
         try {
-            const products = await productDao.getProductsByCategoryName(categoryName);
+            const products = await productDao.getProductsByCategoryName(category);
             return products;
         } catch (error) {
             throw error;
