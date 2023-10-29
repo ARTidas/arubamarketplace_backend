@@ -9,7 +9,7 @@ const rootTreeController = require('./controllers/root_tree_controller');
 const applicationInstallController = require('./controllers/application_install_controller');
 const clickController = require('./controllers/click_controller');
 const bodyParser = require('body-parser');
-const db = require('./bos/mysql_database_connection_bo');
+const db = require('./models/bos/mysql_database_connection_bo');
 
 const cors = require('cors');
 
