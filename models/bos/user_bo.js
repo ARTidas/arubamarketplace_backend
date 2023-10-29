@@ -34,35 +34,45 @@ const userBo = {
   },
 
   registerUser: async (email, password, passwordConfirmation) => {
+    const validationMessages = [];
     const emailExists = await userDao.emailExist(email);
 
     if (emailExists) {
-      throw new Error('Az email cím már használatban van');
+      validationMessages.push('The email address already exists');
+      throw new Error('The email address already exists');
     }
 
     if (password !== passwordConfirmation) {
-        throw new Error('A megadott két jelszó nem egyezik.');
+        validationMessages.push('The given two passwords are not the same');
+        throw new Error('The given two passwords are not the same');
     }
 
     if (toString(password).length < 6) {
-      throw new Error('A jelszó legalább 6 karakter hosszú legyen');
+      validationMessages.push('The password must have at least 6 characters');
+      throw new Error('The password must have at least 6 characters');
     }
 
     const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+
     if (!emailRegex.test(email)) {
-      throw new Error('Érvénytelen email cím');
+      validationMessages.push('Invalid email address');
+      throw new Error('Invalid email address');
+    }
+
+    if (validationMessages.length > 0) {
+        // Validation failed, return error messages
+        return { success: false, messages: validationMessages };
     }
 
     const password_hash = await bcrypt.hash(password, 10);
-
     const userData = new userDo(email, password_hash);
 
     try {
-      await userDao.saveUser(userData);
-      return 'Regisztráció sikeres';
+        await userDao.saveUser(userData);
+        return { success: true, message: 'Registration was successful' };
     } catch (error) {
-      console.error(error);
-      throw new Error('Hiba történt a regisztráció során');
+        console.error(error);
+        throw new Error('Error occurred during the registration process');
     }
   },
 
