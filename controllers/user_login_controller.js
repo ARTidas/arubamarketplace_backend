@@ -7,6 +7,10 @@ const userBo = require('../models/bos/user_bo'); // Import the user business obj
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
+    console.log("Into the baclands");
+    console.log(email);
+    console.log(password);
+
     try {
         // Call the business object to handle login logic
         const user = await userBo.login(email, password);
