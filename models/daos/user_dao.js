@@ -17,11 +17,13 @@ const userDao = {
 
   // Function to get user data by email
   getUserByEmail: async (email) => {
+    console.log("In the DAO!!!");
     return new Promise((resolve, reject) => {
       db.query('SELECT * FROM users WHERE email = ?', [email], (error, results) => {
         if (error) {
           reject(error);
         } else {
+          console.log(results);
           resolve(results[0]);
         }
       });
