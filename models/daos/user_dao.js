@@ -47,9 +47,6 @@ const userDao = {
   },
 
   saveUser: async (userDo) => {
-    console.log(userDo);
-    console.log("Here!!");
-
     return new Promise((resolve, reject) => {
       db.query('INSERT INTO hck_users (email, password_hash) VALUES (?, ?)', [userDo.email, userDo.password_hash], (error) => {
         if (error) {

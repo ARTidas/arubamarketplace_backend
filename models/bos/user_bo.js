@@ -25,6 +25,7 @@ const userBo = {
       if (passwordMatch) {
         return user;
       } else {
+        console.log("invalid password");
         return null;
       }
     } catch (error) {
@@ -49,25 +50,12 @@ const userBo = {
 
     const emailRegex = /^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
     if (!emailRegex.test(email)) {
-        console.log("szar");
       throw new Error('Érvénytelen email cím');
     }
 
-    console.log("From the backend, bo last mod...");
-
-    console.log(email);
-
-    console.log(password);
-
     const password_hash = await bcrypt.hash(password, 10);
 
-    console.log(password_hash);
-
     const userData = new userDo(email, password_hash);
-
-    console.log("New fasz");
-
-    console.log(userData);
 
     try {
       await userDao.saveUser(userData);

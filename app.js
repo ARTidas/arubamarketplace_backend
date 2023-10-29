@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 app.use('/api', userController); // Az '/api' útvonal alatt érhető el
 app.use('/api', productController);
 app.use('/api/registration', userRegistrationController);
-app.use('/api/user', userLoginController);
+app.use('/api/login', userLoginController);
 app.use('/api', applicationInstallController);
 app.use('/api/click', clickController);
 app.get('/api/hello/:id', async (req, res) => {
