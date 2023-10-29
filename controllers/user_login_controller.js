@@ -9,6 +9,8 @@ router.post('/log', async (req, res) => {
 
      // Ellenőrizd az email és jelszó egyezését
   const result = await userBo.comparePassword(email, password);
+  console.log("Result");
+  console.log(result);
   if (result) {
     res.status(200).json({ message: 'Sikeres bejelentkezés' });
   } else {
