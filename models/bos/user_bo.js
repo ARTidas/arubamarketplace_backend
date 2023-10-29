@@ -68,6 +68,7 @@ const userBo = {
 
   comparePassword: async (email, password) => {
     console.log("In the comparation function");
+    console.log(email, password);
     const user = await userDao.getUserByEmail(email);
     if (user && bcrypt(password, user.password)) {
       return true;
