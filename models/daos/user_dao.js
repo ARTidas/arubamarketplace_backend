@@ -17,19 +17,15 @@ const userDao = {
 
   // Function to get user data by email
   getUserByEmail: async (email) => {
-      try {
-          const query = 'SELECT * FROM hck_users WHERE email = $1';
-          const values = [email];
-          const { rows } = await db.query(query, values);
-
-          if (rows.length === 0) {
-              return null; // User not found
-          }
-
-          return rows[0]; // Return the first user found (assuming email is unique)
-      } catch (error) {
-          throw error; // Handle database query errors
-      }
+    return new Promise((resolve, reject) => {
+      db.query('SELECT * FROM users WHERE email = ?', [email], (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results[0]);
+        }
+      });
+    });
   },
 
   // Function to create a new user
