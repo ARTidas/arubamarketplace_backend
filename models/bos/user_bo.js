@@ -65,6 +65,14 @@ const userBo = {
       throw new Error('Hiba történt a regisztráció során');
     }
   },
+
+  comparePassword: async (email, password) => {
+    const user = await userDao.getUserByEmail(email);
+    if (user && compareSync(password, user.password)) {
+      return true;
+    }
+    return false;
+  }
 };
 
 module.exports = userBo;
