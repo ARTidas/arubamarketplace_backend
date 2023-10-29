@@ -17,7 +17,6 @@ const userDao = {
 
   // Function to get user data by email
   getUserByEmail: async (email) => {
-    console.log("In the DAO!!!");
     return new Promise((resolve, reject) => {
       db.query('SELECT * FROM hck_users WHERE email = ?', [email], (error, results) => {
         if (error) {
