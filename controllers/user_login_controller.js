@@ -7,25 +7,19 @@ const userBo = require('../models/bos/user_bo'); // Import the user business obj
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    console.log("Into the baclands");
+    console.log("Into the backlands");
     console.log(email);
     console.log(password);
 
     try {
-        // Call the business object to handle login logic
         const user = await userBo.login(email, password);
 
         if (user) {
-            // Successful login
-            // You can generate a JWT token here and send it as a response for future authenticated requests.
-            // For now, let's just send a success message.
             res.json({ message: 'Login successful' });
         } else {
-            // Invalid credentials
             res.status(401).json({ error: 'Invalid email or password' });
         }
     } catch (error) {
-        // Handle errors, e.g., database connection error, etc.
         console.error(error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
