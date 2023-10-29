@@ -68,9 +68,9 @@ const userBo = {
 
   comparePassword: async (email, password) => {
     const user = await userDao.getUserByEmail(email);
-    if (user && bcrypt.compare(bcrypt.hash(password), bcrypt.hash(user.password))) {
-      return true;
-    }
+        if (user && await bcrypt.compare(password, user.password_hash)) {
+            return true;
+        }
     return false;
   }
 };
