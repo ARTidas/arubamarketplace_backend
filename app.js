@@ -5,32 +5,26 @@ const userDo = require('./models/dos/user_do');
 const productController = require('./controllers/product_controller');
 const userRegistrationController = require('./controllers/user_registration_controller');
 const userLoginController = require('./controllers/user_login_controller');
-const rootTreeController = require('./controllers/root_tree_controller');
-const applicationInstallController = require('./controllers/application_install_controller');
-const clickController = require('./controllers/click_controller');
 const bodyParser = require('body-parser');
-const db = require('./models/bos/mysql_database_connection_bo');
 
 const cors = require('cors');
 
-// Engedélyezd a CORS-t a megfelelő eredettel (frontend eredetével)
 app.use(cors({
-  origin: 'http://localhost:4200', // Itt add meg a frontend URL-jét
+  origin: 'http://localhost:4200',
 }));
 
 const port = process.env.PORT || 80;
 
 app.listen(port, () => {
-  console.log(`Az alkalmazás fut a ${port} porton.`);
+  console.log(`The application is running on port: ${port}.`);
 });
 
+//set up the API-s
 app.use(bodyParser.json());
-app.use('/api', userController); // Az '/api' útvonal alatt érhető el
+app.use('/api', userController);
 app.use('/api', productController);
 app.use('/api/registration', userRegistrationController);
 app.use('/api/login', userLoginController);
-app.use('/api', applicationInstallController);
-app.use('/api/click', clickController);
 app.get('/api/hello/:id', async (req, res) => {
 
   /* MAKE DATABASE HERE */

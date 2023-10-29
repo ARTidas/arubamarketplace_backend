@@ -1,4 +1,3 @@
-//const dbPool = require('../bos/mysql_database_connection_bo');
 const db = require('../bos/mysql_database_connection_bo');
 
 const productDao = {

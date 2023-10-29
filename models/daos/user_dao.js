@@ -1,5 +1,4 @@
 const db = require('../bos/mysql_database_connection_bo');
-const userDo = require('../dos/user_do');
 
 const userDao = {
   // Function to get all user data

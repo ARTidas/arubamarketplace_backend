@@ -7,13 +7,13 @@ router.get('/products', async (req, res) => {
     const products = await productBo.getProducts();
     res.json(products);
   } catch (err) {
-    console.error('Nem sikerült lekérdezni a termékeket. Hiba:', err);
-    res.status(500).json({ error: 'Hiba az adatok lekérdezése során' });
+    console.error('Can not get the product... Error:', err);
+    res.status(500).json({ error: 'An error occurred while querying the data' });
   }
 });
 
 router.get('/products/search/:search', async (req, res) => {
-  const { search } = req.params; // A keresési kifejezés, amit a frontend küld
+  const { search } = req.params; 
 
   try {
     const products = await productBo.getProductsByName(search);
@@ -30,11 +30,10 @@ router.get('/products/search/:search', async (req, res) => {
       productTitles: products_title,
     };
 
-    // JSON formátumban küldjük vissza a talált termékeket
     res.json(responseData);
   } catch (err) {
-    console.error('Hiba a termékek keresése során:', err);
-    res.status(500).json({ error: 'Hiba a keresés során' });
+    console.error('Error while searching for products:', err);
+    res.status(500).json({ error: 'Error during search' });
   }
 });
 
@@ -45,8 +44,8 @@ router.get('/products/categories', async (req, res) => {
     // Send the categories as a JSON response
     res.json(categories);
   } catch (err) {
-    console.error('Hiba a kategóriák keresése során:', err);
-    res.status(500).json({ error: 'Hiba a keresés során' });
+    console.error('Error searching for categories:', err);
+    res.status(500).json({ error: 'Error during search' });
   }
 });
 
@@ -61,8 +60,8 @@ router.get('/products/category/:category', async (req, res) => {
     // Send the products as a JSON response
     res.json(products);
   } catch (err) {
-    console.error('Hiba a termékek keresése során:', err);
-    res.status(500).json({ error: 'Hiba a keresés során' });
+    console.error('Error while searching for products:', err);
+    res.status(500).json({ error: 'Error during search' });
   }
 });
 
@@ -75,8 +74,8 @@ router.get('/products/id/:id', async (req, res) => {
     // Send the product as a JSON response
     res.json(product);
   } catch (err) {
-    console.error('Hiba a termék keresése során:', err);
-    res.status(500).json({ error: 'Hiba a keresés során' });
+    console.error('Error while searching for products:', err);
+    res.status(500).json({ error: 'Error during search' });
   }
 });
 
@@ -88,8 +87,8 @@ router.post('/products/create', async (req, res) => {
     const productId = await productBo.createProduct(title, price, description, owners, img);
     res.status(201).json({ id: productId, message: 'Product created successfully' });
   } catch (err) {
-    console.error('Hiba a termék létrehozása során:', err);
-    res.status(500).json({ error: 'Hiba a termék létrehozása során' });
+    console.error('Error creating product:', err);
+    res.status(500).json({ error: 'Error creating product' });
   }
 });
 

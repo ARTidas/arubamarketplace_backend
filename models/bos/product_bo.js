@@ -1,4 +1,3 @@
-const productDo = require('../dos/product_do'); // Import the data object
 const productDao = require('../daos/product_dao');
 
 const productBo = {
